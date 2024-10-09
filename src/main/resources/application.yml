@@ -1,0 +1,16 @@
+spring:
+  kafka:
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      group-id: "order-event-group-id"
+    bootstrap-servers: localhost:9092
+
+app:
+  kafka:
+    orderEventTopic: "order-topic"
+    kafkaEventGroupId: "order-event-group-id"
+
+server:
+  port: 8080
