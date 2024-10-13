@@ -30,19 +30,7 @@ public class OrderEventService {
     private ConcurrentKafkaListenerContainerFactory<String, OrderEvent> factory;
 
     public void sendOrderEvent(OrderEvent orderEvent) {
-        ProducerFactory<String, OrderEvent> producerFactory = kafkaTemplate.getProducerFactory();
-//        log.info("KEY_SERIALIZER: {}\n VALUE_SERIALIZER: {}", producerFactory.getKeySerializer(),
-//                producerFactory.getValueSerializer(), producerFactory.ge);
-        Map<String, Object> configs = producerFactory.getConfigurationProperties();
-        for (Map.Entry<String, Object> entry : configs.entrySet()) {
-            System.err.println(MessageFormat.format("{0} - {1}", entry.getKey(), entry.getValue()));
-        }
         kafkaTemplate.send(orderTopic, orderEvent);
-        for(Map.Entry<String, Object> entry : factory.getConsumerFactory().getConfigurationProperties().entrySet()) {
-            System.err.println(MessageFormat.format("{0} - {1}", entry.getKey(), entry.getValue()));
-        }
-
-
     }
 
 }
